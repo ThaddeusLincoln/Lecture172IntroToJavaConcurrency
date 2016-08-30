@@ -1,5 +1,7 @@
 package com.turing.jdev.threads;
 
+import com.turing.tools.threads.colors.Color;
+
 public class AnotherThread extends Thread {
 
 	@Override

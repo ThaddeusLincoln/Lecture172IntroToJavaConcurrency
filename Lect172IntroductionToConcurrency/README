@@ -85,6 +85,18 @@ to do so, will cause java.lang.IllegalThreadStateException.
 
 Also remember that when we use an ANONYMOUS CLASS we have to start the THREAD immediately. 
 
+NOTE : only the lines written before the thread we can now for sure, when are going to be executed.
+
+A second way for creating threads is using the RUNNABLE interface. The advantage of using it is that
+only requires us to to implement a single method, run(). So instead of implementing the run method
+of a class that subclasses (in this case subclasses Thread), we can have any class implementing 
+Runnable interface and then all we have to do is add the run() method to that class. Of course,
+after that we will want to write the code in the run method, to execute on a Thread that we created.
+
+The way we use a Runnable, is by creating Thread instance to which we will pass as parameter
+the Runnable class and which code contained in run() will be executed when the method 
+start() of the Thread instnace class is executed.
+
 
 
 
