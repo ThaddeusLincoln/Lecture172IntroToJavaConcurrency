@@ -66,4 +66,27 @@ someone else sees when they run an application that uses concurrency on their co
 For instance, we can't guarantee in which order lines will be printed to the console 
 because of the very nature of threading itself.
 
+We can never assume that actions thread-related are going to run in the same order. It really depends
+on the timing, how long a particular thread takes to run, and keep in mind that when dealing with 
+threads is up to the system how to schedule when the threads will run, in in relation to that 
+we can influence the order of execution by setting a particular threads priority but even with that
+said we can never assume that threads are going to run in a particular order. 
+
+Instead of creating a named class for the thread we could've created an anonymous class which
+is useful if you only ever going to run the code once. But if we intend to run the code several times
+then creating a class for the thread will provide better results.
+
+IMPORTANT : it's not the same "to run" the code several times as "to start" the code several times.
+We have to keep in mind that we're not allowed to start the same instance of a thread more than once. 
+If we create a subclass of Thread and we want to execute the code in the run() method 
+more than once, then what we have to do is create a new instance of the subclass of Thread every time
+we want that code to be executed. We can not start a thread instance that has already ran. Attempting
+to do so, will cause java.lang.IllegalThreadStateException.
+
+Also remember that when we use an ANONYMOUS CLASS we have to start the THREAD immediately. 
+
+
+
+
+
  
