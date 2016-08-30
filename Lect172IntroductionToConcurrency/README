@@ -117,7 +117,24 @@ same thread that called the run method.
 NOTE : we can set the name of a Thread by using the setName() method.
 
 NOTE : we can ask threads to sleep, or to stop executing for a specific amount of time, or we might want 
-a thread to do somehing every time a specific amount of time has passed. 
+a thread to do something every time a specific amount of time has passed. 
+
+It is never guarantee that a thread will sleep for the interval that was specified to, as it could be interrupted, 
+or maybe the JVM has to call the underlying operating system to put the Thread to sleep and is possible that
+the OS may not support the granularity (level of detail) that is asking for, for example it might not support
+nano-seconds. So this operation is again, very operating system-dependent. And, as we remember the JVM 
+is both OS-dependent and JVM-dependent.
+
+We interrupt a thread when we want to stop what is doing and to do something else. Normally when we do that 
+is because we want it to terminate. There's 2 ways for a thread to notice that they've been interrupted. 
+
+1. to catch the interrupted exception (java.lang.InterruptedException)
+
+When the run() method doesn't call any method that throws an interruptedException it should call the interrupted()
+method periodically to check whether it's been interrupted and that method will return true when another Thread
+has interrupted it. The way for one thread to interrupt another, is by calling the interrupt method on the thread
+instance that it wants to interrupt. This means that it will need a reference to the thread instance to be able
+to do it,   
 
 
 
