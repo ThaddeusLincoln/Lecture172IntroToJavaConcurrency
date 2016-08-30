@@ -1,0 +1,69 @@
+Process : is a unit of execution that has its own memory space. Each instance of a Java Virtual Machine (JVM)
+ runs as a process (this isn't true for all JVM implementation but for most of them). 
+ When we run a Java console application, we're kicking off a process. 
+ And when we're running a JavaFX application we're kicking a process as well. 
+
+Many people will use the terms PROCESS and APPLICATION interchangeably, 
+and we will too. So if one Java application (process) is running and we run another, 
+each of those applications or processes has its own memory space or HEAP. 
+And the first Java application/process can't access the heap that belongs to the second. 
+The heap isn't shared between them, they each have their own.
+
+THREAD : a thread is a unit of execution with a process, each process can have multiple threads. 
+In Java every process/application has at least one thread, 
+the main-thread (or JavaFX application thread for UI apps). In fact every Java application/process 
+also has multiple system threads that handle every days tasks like memory management and I/O. 
+We, as Java developers don't explicitly create and code those threads, 
+instead our code runs in the main thread which is created automatically by our Java program 
+or in other threads that we explicitly created. And concurrency, 
+this section we're about to dive in is about how to create these threads.
+
+Creating a thread doesn't requires as many resources as creating a process. 
+Every thread created by a process/application shares the process's memory and files, 
+which can cause big problems and we need to deal with it.
+
+In addition the process's memory or HEAP, each thread has what's called a thread STACK, 
+which is memory that only that particular thread can access. Later we'll go deeper 
+into the store in the HEAP vs. storing in the STACK implications.
+
+Every Java application runs as a single process, 
+and each process can have multiple threads. 
+Every process has a HEAP and every thread has a thread STACK. Some advantages to using several threads are:
+
+1. Sometimes we need to perform a task that's going to take a long time, 
+e.g, query a database or fetching data from the internet. This can be done in the main thread, 
+but the code withing each thread executes in a linear fashion, so the main thread won't be able 
+to do anything else while it's waiting for the data.
+
+In other words, the execution of the main thread will be suspended. 
+It has to wait for the data to be returned before it can execute the next line of code. 
+To the user this could appear as if the application has died or frozen, 
+specially when we're dialing with UI applications.
+
+Instead of tying up the main thread, we can create another thread and execute the 
+long-running task on it. This would free up the main thread, 
+so that it can continue executing. It can report progress or accept user 
+input while the long-running task continues to execute in the background. 
+
+2. Could be the case that an API requires us to provide one (thread). 
+Sometimes we have to provide the code that will run when a method we've called 
+reaches a certain point in its execution. In this particular case, we usually don't 
+create the thread, we just pass in the code that we want to run on the thread. 
+
+
+CONCURRENCY : refers to an application doing more than one thing at a time. 
+That doesn't necessarily means that the application is doing more than one thing 
+at the same time. What it means, is that progress can be made on more than one task. 
+For instance, let's say that an application wants to download data and draw 
+a shape on the screen. So, if it's a concurrent application, it can download a bit of data, 
+then switch to drawing part of the shape, then switch back to downloading some more data,... and so on. So, 
+CONCURRENCY means that one task doesn't have to complete before another one can start.
+
+NOTE : when working with threads, we're at the mercy of the JVM and the operating 
+system when it comes to when the threads are scheduled to run. As a result, 
+output can vary from run to run, and you might not see the exact same output that 
+someone else sees when they run an application that uses concurrency on their computer. 
+For instance, we can't guarantee in which order lines will be printed to the console 
+because of the very nature of threading itself.
+
+ 
