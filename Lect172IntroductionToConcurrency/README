@@ -95,7 +95,31 @@ after that we will want to write the code in the run method, to execute on a Thr
 
 The way we use a Runnable, is by creating Thread instance to which we will pass as parameter
 the Runnable class and which code contained in run() will be executed when the method 
-start() of the Thread instnace class is executed.
+start() of the Thread instance class is executed.
+
+RUNNABLE vs THREAD ================================================================================
+
+Most of the time developers use Runnable interface, the reason is that is more convenient, and there's
+also many method in the Java API that have a Runnable instance passed as parameter. For example, since 
+the introduction of LAMBA EXPRESSIONS is becoming even more convenient to use anonymous Runnable instances.
+When we're not forced, there's no wrong answer about it, but Runnable is more flexible and useful in the 
+long run.
+
+NOTE : A thread will terminate when it returns form its run method, either implicitly: because it reaches
+the methods end; or explicitly: because it executes a return state.  
+
+NOTE: A common mistake when creating and running threads is to call the threads instance run() method, instead
+of the start() method. It'll be good to remember that we have to implement run() but we don't call it directly,
+we call start. The JVM will actually call that for us. If we forget that and call run(), our application won't 
+crash but instead of running the code in the run() method on a new thread, the code is going to be run on the 
+same thread that called the run method.
+
+NOTE : we can set the name of a Thread by using the setName() method.
+
+
+
+
+
 
 
 

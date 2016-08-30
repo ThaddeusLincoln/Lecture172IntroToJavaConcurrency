@@ -9,6 +9,7 @@ public class Main {
 		
 		// 2.
 		AnotherThread anotherThread = new AnotherThread();
+		anotherThread.setName("Another Thread");
 		anotherThread.start();
 		
 		// 3. java.lang.IllegalThreadStateException
