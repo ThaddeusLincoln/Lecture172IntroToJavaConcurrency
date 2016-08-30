@@ -27,9 +27,22 @@ public class Main {
 			
 		}.start();
 		
-		// 7.
+		// 7. using Runnable by passing it as a parameter to a Thread object
 		Thread myRunnableThread = new Thread(new MyRunnable());
 		myRunnableThread.start();
+		
+		// 8. using Runnable by using an ANONYMOUS class
+		Thread myRunnableThread2 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				System.out.println("Yo man, here I'm using an Anonymous Runnable!!, Cool, eh?!");
+				
+			 }
+		});
+		
+		myRunnableThread2.start();
+		
 	}
 
 }
