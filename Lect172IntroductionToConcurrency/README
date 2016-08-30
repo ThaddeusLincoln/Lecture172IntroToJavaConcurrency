@@ -116,6 +116,9 @@ same thread that called the run method.
 
 NOTE : we can set the name of a Thread by using the setName() method.
 
+NOTE : we can ask threads to sleep, or to stop executing for a specific amount of time, or we might want 
+a thread to do somehing every time a specific amount of time has passed. 
+
 
 
 
