@@ -134,7 +134,49 @@ When the run() method doesn't call any method that throws an interruptedExceptio
 method periodically to check whether it's been interrupted and that method will return true when another Thread
 has interrupted it. The way for one thread to interrupt another, is by calling the interrupt method on the thread
 instance that it wants to interrupt. This means that it will need a reference to the thread instance to be able
-to do it,   
+to do it.
+
+INTERRUPT & JOIN ==============================================================================
+
+If we want a Thread to be terminated if it gets terminated, we have to make a return. 
+
+Besides putting a thread to sleep is posible to wake it up periodically, to see if there's any work 
+for the thread to do. For example let's say that we have a situation where we know that a thread can't 
+continue to execute until another thread is terminated. For example we might know that there won't be 
+any data to process until the thread that's fetching the data has completed executing. 
+So in that scenario rather than waking up the thread periodically to see if there's any data, 
+we can JOIN the thread to the thread that's fetching the data and when we join a thread to a second thread, 
+what happens is that first thread will wait for the second thread to terminate and then it will 
+continue to execute. 
+
+JOIN can throw an InterruptedException and that's because, just like the sleep() method join() can terminate prematurely, 
+if this thread is terminated by another. When working with threads we already know that we can't guarantee in which all 
+threads will execute, but we also can't make assumptions about how long threads will sleep or wait, 
+to summarize, there isn't really any guarantees. 
+
+What would happen if we join thread-A to thread-B, and thread-B never terminates? In that case our application 
+would't terminate and it would probably look as if it had actually died or crashed. In order to prevent this 
+situation we can pass a TIMEOUT value to the join method. If we passe a TIMEOUT to threadA.join() it will wait 
+for thread-B to terminate OR for the timeOUT prior to terminate, whichever happens first. So, if thread-B hasn't 
+terminated when the timeOUT period's passed, thread-A will stop waiting for that to happen.
+
+When we join one thread to another, and the JOIN timesOut we have to handle that case. In a real world application, 
+if for example the thread was waiting for data and the join() timesOut then we wouldn't have any data to process, 
+and we have somehow to report that to the user, "error downloading or something like that".  
+
+There are other methods in the thread class that we can use, like setPriority(), 
+which we can use to try to influence the order in which threads are run but they should really regard 
+this "setting a threads priority", more a suggestion to the JVM than a command. In fact some operating 
+systems don support setPriority() at all and will ignore it. Once again, we shall never assume that 
+setting priorities will force threads to run in a particular order, it's really ultimately up to the 
+JVM and the OS how the execution will take place.
+
+ 
+
+
+
+
+
 
 
 

@@ -19,14 +19,17 @@ public class Main {
 		//anotherThread.start();
 		
 		// 5. ANONYMOUS CLASS
-		new Thread(){
+		/*new Thread(){
 			
 			@Override
 			public void run(){
 				System.out.println("Hallo vom ANONYMOUS class!!");
 			}
 			
-		}.start();
+		}.start();*/
+		
+		// 7.1 using lambda expressions with threads
+		new Thread(()-> System.out.println("Thread with Lamda Expression!")).start();
 		
 		// 7. using Runnable by passing it as a parameter to a Thread object
 		Thread myRunnableThread = new Thread(new MyRunnable());
