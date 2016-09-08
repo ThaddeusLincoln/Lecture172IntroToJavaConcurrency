@@ -26,7 +26,19 @@ public class Main {
 		}.start();
 		
 		// 7. using Runnable by passing it as a parameter to a Thread object
-		Thread myRunnableThread = new Thread(new MyRunnable());
+		Thread myRunnableThread = new Thread(new MyRunnable()) {
+			@Override
+			public void run(){
+				System.out.println("Ciao, sono una class anonima chi implementa run()");
+				
+				try{
+					anotherThread.join(10000);	// this will do its work after anotherThread is done, or timesOut
+					System.out.println("Another Thread ha finito, o ha fatto timeout, allora sto correndo di nuovo");
+				}catch(InterruptedException e){
+					System.out.println("Non ho potuto finire la mia task");
+				}
+			}
+		};
 		myRunnableThread.start();
 		
 		// anotherThread.interrupt();
