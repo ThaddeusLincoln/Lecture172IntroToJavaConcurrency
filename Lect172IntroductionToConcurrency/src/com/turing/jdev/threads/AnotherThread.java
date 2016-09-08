@@ -13,6 +13,7 @@ public class AnotherThread extends Thread {
 		}catch(InterruptedException e){
 			// this line will be executed if another thread wakes this one
 			System.out.println("Another therad woke me up");
+			return; // we want the thread execution to end right away
 		}
 		
 		System.out.println("3 seconds are passed and " + currentThread().getName() + "is awake again");
